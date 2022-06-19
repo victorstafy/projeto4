@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="estilos.css" />
+    <title>driveneats</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet"> 
+
+  </head>
+  <body>
+    <div class="topo">
+      <h1>Driven Eats</h1>
+      <h2>Sua comida em 6 minutos</h2>
+    </div>
+
+    <div class="conteudo">
+      
+      <h3>Primeiro, seu prato</h3>
+      <div class="tipo_ref">
+        <div class="opcoes" onclick="Select_comida(this)">
+          <img src="frango.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <div class="opcoes" onclick="Select_comida(this)">
+          <img src="frango.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <div class="opcoes" onclick="Select_comida(this)">
+          <img src="frango.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+      </div>
+
+      <h3>Agora, sua bebida</h3>
+      <div class="tipo_ref">
+        <div class="opcoes" onclick="Select_bebida(this)">
+          <img src="coca.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <div class="opcoes" onclick="Select_bebida(this)">
+          <img src="coca.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <div class="opcoes" onclick="Select_bebida(this)">
+          <img src="coca.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+      </div>
+
+      <h3>Por fim, sua sobremesa</h3>
+      <div class="tipo_ref">
+        <div class="opcoes" onclick="Select_sobremesa(this)">
+          <img src="doce.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <div class="opcoes sobremesa" onclick="Select_sobremesa(this)">
+          <img src="doce.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+        <div class="opcoes" onclick="Select_sobremesa(this)">
+          <img src="doce.jpg">
+          <h4>Frango Yin Yang</h4>
+          <p> Um pouco de batata, um pouco de salada</p>
+          <h5>R$ 14,90</h5>
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </div>
+      </div>
+
+    </div class="bottom_bar">  
+      <div class="button" onclick="WhatsappCall()">
+        <p> Selecionar os 3 itens <br /> para fechar o pedido</p>
+      </div>
+    <div>
+
+    </div>
+
+  </body>
+
+  <script>
+    let selecao1=0; let selecao2=0; let selecao3=0;
+    let selecao1_at=0; let selecao2_at=0; let selecao3_at=0;
+    let icone1; let icone2; let icone3;
+
+    function Select_comida(element){ 
+      let icon=element.querySelector("ion-icon");
+      console.log(icon)
+      if (element.classList.contains("selecao")){
+        element.classList.remove("selecao");
+        icon.style.display="none";
+        return
+      }
+      if (selecao1){
+        selecao1.classList.remove("selecao");
+        icone1.style.display="none";
+      }
+      element.classList.add("selecao")
+      icon.style.display="block";
+      selecao1_at="ativado";
+      selecao1=element;
+      icone1=icon;
+      button_activate()
+    }
+
+    function Select_bebida(element){ 
+      let icon=element.querySelector("ion-icon");
+      console.log(icon)
+      if (element.classList.contains("selecao")){
+        element.classList.remove("selecao");
+        icon.style.display="none";
+        return
+      }
+      if (selecao2){
+        selecao2.classList.remove("selecao");
+        icone2.style.display="none";
+      }
+      element.classList.add("selecao")
+      icon.style.display="block";
+      selecao2_at="ativado";
+      selecao2=element;
+      icone2=icon;
+      button_activate()
+    }
+
+    function Select_sobremesa(element){ 
+      let icon=element.querySelector("ion-icon");
+      console.log(icon)
+      if (element.classList.contains("selecao")){
+        element.classList.remove("selecao");
+        icon.style.display="none";
+        return
+      }
+      if (selecao3){
+        selecao3.classList.remove("selecao");
+        icone3.style.display="none";
+      }
+      element.classList.add("selecao")
+      icon.style.display="block";
+      selecao3=element;
+      selecao3_at="ativado";
+      icone3=icon;
+      button_activate()
+    }
+
+    function button_activate(){
+      if (selecao1_at==="ativado" && selecao2_at==="ativado" && selecao3_at==="ativado"){
+        el_finish=document.querySelector(".button")
+        el_finish_p=document.querySelector(".button p")
+        el_finish_p.innerHTML="Fechar pedido";
+        el_finish.style.backgroundColor='#32B72F';
+      }
+    }
+
+    function WhatsappCall(){
+      if (selecao1!==null && selecao2!==null && selecao3!==null){
+
+        var celular = "5534996819178";
+        var price = Number(27.7).toFixed(2);
+        var texto = "Olá, gostaria de fazer o pedido: \n - Prato: Frango Yin Yang \n- Bebida: Coquinha Gelada \n - Sobremesa: Pudim \n Total: R$ "+price;
+        texto = window.encodeURIComponent(texto);
+        window.open("https://api.whatsapp.com/send?phone=" + celular + "&text=" + texto, "_blank");
+      }
+    }
+
+  </script>
+  <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</html>
+
+
+<!-- document.querySelector(".opcoes ion-icon").style.display="initial"; -->
+
+<!-- var temp_link = document.createElement("a");
+temp_link.href = "https://wa.me/5534996819178";
+temp_link.target = '_blank';
+temp_link.innerHTML = "link";
+
+var par = document.createElement("p");
+par.innerHTML = "Fechar pedido";
+par.appendChild(temp_link);
+document.querySelector(".button").appendChild(par); -->

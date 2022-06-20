@@ -63,12 +63,17 @@ function select_card(element){
 
     selected_card_now=shown_parrots[id_list.indexOf(Number(img_id))];
     selected_card_el_list.push(element);
-    
+
+    console.log(n_sel_cards)
     if (n_sel_cards===2) {
         if (selected_card!==selected_card_now){
             n_sel_cards=setTimeout(rec_loop,1000);
             return n_sel_cards
-        }     
+        }    
+        else{
+            n_sel_cards=0;
+            selected_card_el_list=[];
+        } 
     }
 
     cards_state[id_list.indexOf(Number(img_id))]=true;
@@ -77,8 +82,10 @@ function select_card(element){
 }
 
 function rec_loop(){
+    console.log(selected_card_el_list)
     for (let i = 0; i < n_sel_cards+1; i++) {
-        flip_card(selected_card_el_list[i])
+        img_id=flip_card(selected_card_el_list[i])
+        cards_state[id_list.indexOf(Number(img_id))]=false;
     }
     selected_card_el_list=[];
     n_sel_cards=0;
@@ -86,14 +93,15 @@ function rec_loop(){
 }
 
 function check_game(cards_state_vector){
-    // console.log(cards_state_vector.every(i => i))
+    console.log(cards_state_vector)
     if ( cards_state_vector.every(i => i) ){
         alert(`Você ganhou em ${n_turns} jogadas!`)
     }
 }
 
 function flip_card(element){
-    console.log(element)
+    if (!element) return null
+    // console.log(element)
     element.classList.toggle("turn-over");
     let el_img=element.getElementsByTagName("img");
     let img_id=el_img[0].id;
@@ -103,7 +111,7 @@ function flip_card(element){
     // console.log(img_id)
 
     if (img_src.split('\\').pop().split('/').pop()===card_back){
-        console.log(img_src.split('\\').pop().split('/').pop())
+        // console.log(img_src.split('\\').pop().split('/').pop())
         el_img[0].src=shown_parrots[id_list.indexOf(Number(img_id))];
     }
     else {

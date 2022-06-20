@@ -49,6 +49,15 @@ body {
   justify-content: center;
   align-items: center;
   margin: 17px 17px 17px 17px;
+  border: 1px solid #99CEA8;
+  border-radius: 5px;
+  background-color: #A7E9AF;
+  transition: all .5s;
+  transform-style: preserve-3d;
+}
+
+.turn-over {
+  transform: rotateY(180deg);
 }
 
 .carta img{

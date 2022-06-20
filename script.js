@@ -1,6 +1,5 @@
 let n_cards
 let id_list
-let cards_state
 let parrots_pairs=["1.gif","1.gif","2.gif","2.gif","3.gif","3.gif","4.gif","4.gif","5.gif","5.gif","6.gif","6.gif","7.gif","7.gif"];
 let card_back="front.png";
 let n_sel_cards=0;
@@ -9,7 +8,6 @@ let selected_card=null;
 let selected_card_el_list=[];
 
 n_cards=ask_stack_size()
-// console.log(n_cards)
 let shown_parrots=hide_unused_cards(n_cards)
 
 function ask_stack_size() {
@@ -37,9 +35,6 @@ function hide_unused_cards(n_cards){
         shown_parrots.push(parrots_pairs[j+max_cards-n_cards])
     }
     shown_parrots.sort(comparador); 
-    cards_state=Array(shown_parrots.length).fill(false);
-    // console.log(shown_parrots)
-    // console.log(id_list)
     return shown_parrots
 }
 
@@ -58,52 +53,55 @@ function select_card(element){
         n_sel_cards--;
     }
 
-    // console.log(id_list)
-    // console.log(n_sel_cards)
-
     selected_card_now=shown_parrots[id_list.indexOf(Number(img_id))];
     selected_card_el_list.push(element);
-    
+
     if (n_sel_cards===2) {
         if (selected_card!==selected_card_now){
             n_sel_cards=setTimeout(rec_loop,1000);
             return n_sel_cards
-        }     
+        }    
+        else{
+            n_sel_cards=0;
+            selected_card_el_list=[];
+        } 
     }
 
-    cards_state[id_list.indexOf(Number(img_id))]=true;
     selected_card=shown_parrots[id_list.indexOf(Number(img_id))];
-    check_game(cards_state)
+    check_game()
 }
 
 function rec_loop(){
+    console.log(selected_card_el_list)
     for (let i = 0; i < n_sel_cards+1; i++) {
-        flip_card(selected_card_el_list[i])
+        img_id=flip_card(selected_card_el_list[i])
     }
     selected_card_el_list=[];
     n_sel_cards=0;
     return n_sel_cards
 }
 
-function check_game(cards_state_vector){
-    // console.log(cards_state_vector.every(i => i))
-    if ( cards_state_vector.every(i => i) ){
+function check_game(){
+    let elements=document.querySelectorAll(".turn-over");
+    if ( elements.length===Number(n_cards) ){
         alert(`Você ganhou em ${n_turns} jogadas!`)
+        for (let i = 0; i < elements.length; i++) {
+            img_id=flip_card(elements[i])
+        }
+        selected_card_el_list=[];
+        n_sel_cards=0;
+        n_turns=0;
     }
 }
 
 function flip_card(element){
-    console.log(element)
+    if (!element) return null
     element.classList.toggle("turn-over");
     let el_img=element.getElementsByTagName("img");
     let img_id=el_img[0].id;
     let img_src=el_img[0].src;
 
-    // console.log(img_src)
-    // console.log(img_id)
-
     if (img_src.split('\\').pop().split('/').pop()===card_back){
-        console.log(img_src.split('\\').pop().split('/').pop())
         el_img[0].src=shown_parrots[id_list.indexOf(Number(img_id))];
     }
     else {
